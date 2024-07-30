@@ -1,0 +1,28 @@
+name: Automation #工作流程名称
+on:
+  push:
+    branches: [ main ]  #触发条件。在 main 进行 push 操作之后触发。
+jobs: #任务
+  build: #构建
+    runs-on: ubuntu-latest #在 Ubuntu 上进行构建
+    steps: #步骤。每个「-」代表步骤下的一个动作。
+      #动作 1。调用 checkout，把当前的文件复制到虚拟服务器
+      - uses: actions/checkout@master 
+      #动作 2。安装 node.js
+      - name: install nodejs # 动作的名字
+        uses: actions/setup-node@master #调用 setup-node，安装 Node.js
+        with: #参数
+          node-version: "18.18.2" #指定 Node.js 的版本
+      #动作 3。安装当前项目的依赖
+      - name: install deps # 动作的名字
+        run: npm install #运行的命令
+      #动作 4。编译项目，使用 build 命令生成文件
+      - name: build app # 动作的名字
+        run: npm run docs:build #运行的命令
+      #动作 5。将生成的文件同步到ghpage
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@4.1.3
+        with:
+          BRANCH: gh-pages
+          FOLDER: /.vuepress/dist
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
