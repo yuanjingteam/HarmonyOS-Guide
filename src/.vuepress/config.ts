@@ -2,7 +2,7 @@ import { defineUserConfig } from "vuepress";
 import theme from "./theme.js";
 
 export default defineUserConfig({
-  base: "/",
+  base: "/HarmonyOS-Guide/",
 
   lang: "zh-CN",
   title: "HarmonyOS-Guide",
