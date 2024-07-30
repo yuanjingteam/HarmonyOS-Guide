@@ -2,7 +2,7 @@
   "name": "harmony-os-guide",
   "version": "2.0.1",
   "description": "HarmonyOS教程",
-  "license": "Apache-2.0",
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "docs:build": "vuepress-vite build src",
